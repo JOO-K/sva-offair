@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+</head>
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    /* div{
+          background: rgba(255, 255, 255, 0) !important;
+          border: none !important;
+      } */
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+  </style>
+<body>
+<div id="top-scroll" style="position: fixed; top: 0; background: rgb(120, 71, 252);"></div>
+
+<div
+  style="
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 93px;
+    height: 40px;
+    margin: 27px;
+    text-align: left;
+    z-index: 400;
+  "
+>
+  
+  <div
+    class="home"
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      
+    "
+  >
+    
+    <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+      <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+    </span>
+  </div>
+
+</div>
+
+<style>
+
+  @media all and (max-width: 480px) {
+    .info{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .home{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .student-nav{
+      width: 40vw !important;
+    }
+    .home span{
+      font-size: 7vw  !important;
+    }
+    .info span{
+      font-size: 7vw !important;
+    }
+    .student-nav span{
+      font-size: 7vw !important;
+    }
+  }
+</style>
+
+<div
+  class="info"
+  style="
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    margin: 27px;
+    text-align: right;
+    z-index: 400;
+  "
+>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    "
+  >
+  <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+    <a href="info.html" style="text-decoration: none; color: black;">
+      Info
+    </a>
+  </span>
+  </div>
+</div>
+
+<div
+  class="student-nav"
+  style="
+    position: relative;
+    width: 650px;
+    height: 150px;
+    margin: 100px auto 20px auto;
+    text-align: center;
+  "
+>
+  <div
+    style="width: 100%; height: 40px; display: inline-block"
+  >
+    <span
+      style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+      >
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="juliet.html">⤺</a>
+      </span
+    >
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 55px;
+      display: inline-block;
+    "
+  >
+    <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto"
+      >Jay Jongwon Park</span
+    >
+    <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>VCS Website</span>
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      font-size: 50px;
+    "
+  >
+    <span>
+    <a style="text-decoration: none; color: black; cursor: pointer;" href="naomi.html">⤻</a>
+    </span>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .intro {
+      top: 30vw !important;
+      margin-top: 15vw;
+      height: 200vw !important;
+    }
+    .pp-side {
+      /* min-height: 130vw !important; */
+      width: 80vw !important;
+    }
+    .pp-side img {
+      width: 80vw !important;
+      margin-top: 20em;
+    }
+    .state-side {
+      /* min-height: 70vw !important; */
+      width: 80vw !important;
+      top: 160vw !important;
+      margin: 50px 0 200px 0;
+    }
+
+    .state-side h4 {
+      margin-bottom: 20vh !important;
+      font-size: 3.5vw !important;
+    }
+  }
+
+</style>
+
+<div
+  class="intro"
+  style="
+    position: relative;
+    width: 80vw;
+    margin: 5vh auto 15vh auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+    top: 0vw;
+  "
+>
+  <div
+    class="pp-side"
+    style="
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 47%;
+      display: flexbox;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img
+      style="margin: 18% auto 0 auto; width: 70%; display: flexbox"
+      src="images/profile-photo/pp-jay.jpeg"
+      alt=""
+    />
+  </div>
+  <div
+    class="state-side"
+    style="position: absolute; right: 0; width: 47%"
+  >
+    <h4 style="margin: 6vw auto 0vw auto; font-family: Apercu-Light">
+      Jay Park is a recent-convert to digital art delving into the intersection of art and technology. Whether it be in making the internet a more intuitional space through UX/UI development or through his theoretical research into neoCybernetics especially the ontological potential in machine vision being explored in younger methods of design. A few months in, the artist/undecided-hard-science-focus is in a learning phase in his career. Currently he is building up skills in Full Stack WebDev, 3D-slash-4D graphics, and computational design algorithms. Along with his collaborator Eric Joo, the two designers built this very website for this show employing three.js components with simple vanilla HTML, CSS and JS scripts.
+      <br><br>
+      Throughout this semester, the two plan to start a small, virtual design studio based in Los Angeles and New York and have more future plans than current commissions, although work is steadily rolling in. Jay himself is in his last year of college, and is using this thesis project as a compromise between pure experimentation and implementable product design, planning to post his work on this website throughout the next couple months, even after the show's physical end. He hopes you enjoy your time on the page and become a frequent visitor experiencing the show's development throughout the next six-month roll out.
+    </h4>
+  </div>
+</div>
+
+
+<div class="scene"></div>
+
+</body>
+<script src="js/jay.js"></script>
+</html>

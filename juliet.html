@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+</head>
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    /* div{
+          background: rgba(255, 255, 255, 0) !important;
+          border: none !important;
+      } */
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+  </style>
+<body>
+<div id="top-scroll" style="position: fixed; top: 0; background: rgb(45, 114, 188);"></div>
+
+<div
+  style="
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 93px;
+    height: 40px;
+    margin: 27px;
+    text-align: left;
+    z-index: 400;
+  "
+>
+  
+  <div
+    class="home"
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      
+    "
+  >
+    
+    <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+      <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+    </span>
+  </div>
+
+</div>
+
+<style>
+
+  @media all and (max-width: 480px) {
+    .info{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .home{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .student-nav{
+      width: 40vw !important;
+    }
+    .home span{
+      font-size: 7vw  !important;
+    }
+    .info span{
+      font-size: 7vw !important;
+    }
+    .student-nav span{
+      font-size: 7vw !important;
+    }
+  }
+</style>
+
+<div
+  class="info"
+  style="
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    margin: 27px;
+    text-align: right;
+    z-index: 400;
+  "
+>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    "
+  >
+  <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+    <a href="info.html" style="text-decoration: none; color: black;">
+      Info
+    </a>
+  </span>
+  </div>
+</div>
+
+<div
+  class="student-nav"
+  style="
+    position: relative;
+    width: 450px;
+    height: 150px;
+    margin: 100px auto 20px auto;
+    text-align: center;
+  "
+>
+  <div
+    style="width: 100%; height: 40px; display: inline-block"
+  >
+    <span
+      style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+      >
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="nour.html">⤺</a>
+      </span
+    >
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 55px;
+      display: inline-block;
+    "
+  >
+    <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto"
+      >Juliet Nelson</span
+    >
+    <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>Relife</span>
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      font-size: 50px;
+    "
+  >
+    <span>
+    <a style="text-decoration: none; color: black; cursor: pointer;" href="jay.html">⤻</a>
+    </span>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .intro {
+      top: 100vw;
+      margin-top: 30vw;
+      height: 100vw !important;
+    }
+    .pp-side {
+      /* min-height: 130vw !important; */
+      width: 80vw !important;
+    }
+    .pp-side img {
+      width: 80vw !important;
+      margin-top: 20em;
+    }
+    .state-side {
+      /* min-height: 70vw !important; */
+      width: 80vw !important;
+      top: 200vw !important;
+      margin: 50px 0 200px 0;
+    }
+
+    .state-side h4 {
+      margin-bottom: 0 !important;
+      font-size: 3.5vw !important;
+    }
+  }
+
+</style>
+
+<div
+  class="intro"
+  style="
+    top: 9vw;
+    position: relative;
+    width: 80vw;
+    margin: 5vh auto 5vh auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+
+  "
+>
+  <div
+    class="pp-side"
+    style="
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 47%;
+      display: flexbox;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img
+      style="margin: 18% auto 0 auto; width: 70%; display: flexbox"
+      src="images/profile-photo/pp-juliet.jpg"
+      alt=""
+    />
+  </div>
+  <div
+    class="state-side"
+    style="position: absolute; right: 0; width: 47%"
+  >
+    <h4 style="margin: 6vw auto 0 auto; font-family: Apercu-Light;">
+      Juliet Nelson works with digital photography and traditional craft
+        mediums with an emphasis on exemplifying environmental awareness and
+        sustainable consumption in both processes and objects. Nelson uses
+        digital microscopic photography of natural compounds to uncover patterns
+        and designs, finding relationships between the world we cannot see,
+        buried under the label waste, and the world we seek out through
+        aestheticism and consumption. Existing only digitally, these pieces are
+        the most accessible, and the most illusive. Without titles the
+        photographs could be anything, but that is the beauty of nature her
+        photographs evoke. Creating aesthetically appealing digital photographs
+        and documentation of her work, Nelson acknowledges the capital that
+        beauty has in today’s society. Using it to introduce her experience of
+        nature and ideas of reuse for any viewer participating in capitalism.
+        Her physical work uses paper making and sculpture to repurpose consumed
+        materials for the ecological installation “Relife”. <br /><br />
+        Five wine bottles, cotton clothing line, recycled paper, and Smallhold’s
+        blue oyster mushroom mycelium block creates an herbal ecosystem complete
+        with gnats, fruiting mushrooms, and growing herbs. In a similar process
+        Nelson used paper packaging and flowers from her family’s wholesale
+        flower farm to bring attention to the consumption of cut flowers. Energy
+        is used to grow flowers that only provide visual stimulation, until they
+        are thrown away and replaced; a cycle of death that contributes to
+        climate change while her family benefits. This source of contention for
+        her is why she acknowledges the necessary participation in capitalism,
+        but also the necessary understanding of its shortcomings and detriments.
+        Nelson’s work is one way to avoid a total destruction for the sake of
+        capitalism as she is pro ethical and sustainable consumption. It is
+        possible to make a greener world through art.
+    </h4>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .port-slot {
+      height: 80vw !important;
+      top: 300vw;
+    }
+
+    .port-img {
+      width: 100% !important;
+    }
+
+    .desc-cont .left {
+      position: absolute;
+      right: 0 !important;
+      bottom: 0 !important;
+    }
+
+    /* .desc-cont .r {
+      left: 0 !important;
+    } */
+
+    .descript {
+      font-size: 3vw;
+    }
+  }
+  .descript {
+    font-family: "Apercu-Light";
+  }
+  .descript span {
+    font-family: "GT-Haptic-Light-Rotalic";
+  }
+
+  
+
+</style>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/juliet/Bronze Amarnthus.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 50%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Bronze Amaranthus</span>
+      <br />Juliet Nelson
+      <br /><em>Flowers and packing paper</em>
+      <br /><em>10" x 12"</em>
+    </span>
+  </div>
+</div>
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/juliet/Craspedia.jpg"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Craspedia</span>
+        <br />Juliet Nelson
+        <br /><em>Flowers and packing paper</em>
+        <br /><em>10" x 10"</em>
+      </span>
+    </div>
+</div>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    height: 80vw !important;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/juliet/Delphinium.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 45%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Delphinium</span>
+      <br />Juliet Nelson
+      <br /><em>Flowers and packing paper</em>
+      <br /><em>12" x 12"</em>
+    </span>
+  </div>
+</div>
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/juliet/Green Dianthus.jpg"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Green Dianthus</span>
+      <br />Juliet Nelson
+      <br /><em>Digital drawing</em>
+      <br /><em>10" x 15"</em>
+      </span>
+    </div>
+</div>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    height: 60vw;
+    margin: 15vh auto 100vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/juliet/Limonium.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 45%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Limonium</span>
+      <br />Juliet Nelson
+      <br /><em>Flowers and packing paper</em>
+      <br /><em>18" x 18"</em>
+    </span>
+  </div>
+</div>
+
+<div class="scene"></div>
+
+</body>
+<script src="js/juliet.js"></script>
+</html>

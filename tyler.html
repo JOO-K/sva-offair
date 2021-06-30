@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+</head>
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+  </style>
+<body>
+<div id="top-scroll" style="position: fixed; top: 0; background: rgb(255, 234, 0);"></div>
+
+<div
+  style="
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 93px;
+    height: 40px;
+    margin: 27px;
+    text-align: left;
+    z-index: 400;
+  "
+>
+  
+  <div
+    class="home"
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    "
+  >
+    
+  <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+    <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+  </span>
+  </div>
+
+</div>
+
+<style>
+
+  @media all and (max-width: 480px) {
+    .info{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .home{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .student-nav{
+      width: 40vw !important;
+    }
+    .home span{
+      font-size: 7vw  !important;
+    }
+    .info span{
+      font-size: 7vw !important;
+    }
+    .student-nav span{
+      font-size: 7vw !important;
+    }
+  }
+</style>
+
+<div
+  class="info"
+  style="
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    margin: 27px;
+    text-align: right;
+    z-index: 400;
+  "
+>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    "
+  >
+  <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+    <a href="info.html" style="text-decoration: none; color: black;">
+      Info
+    </a>
+  </span>
+  </div>
+</div>
+
+<div
+  class="student-nav"
+  style="
+    position: relative;
+    width: 450px;
+    height: 150px;
+    margin: 100px auto 20px auto;
+    text-align: center;
+  "
+>
+  <div
+    style="width: 100%; height: 40px; display: inline-block"
+  >
+    <span
+      style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+      >
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="https://logpup.github.io/vcs21web/julia.html">⤺</a>
+      </span
+    >
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 55px;
+      display: inline-block;
+    "
+  >
+    <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto">
+      Tyler Downing
+      <span id="" style="font-size: 30px !important; font-family: 'Beatrice'; margin: auto">aka "Spiffie Hippie"</span>
+      <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>Head Boy</span>
+  </span
+    >
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      font-size: 50px;
+    "
+  >
+    <span>
+    <a style="text-decoration: none; color: black; cursor: pointer;" href="nour.html">⤻</a>
+    </span>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .intro {
+      top: 12vw;
+        margin-top: 30vw;
+        height: 250vw !important;
+    }
+    .pp-side {
+      /* min-height: 130vw !important; */
+      width: 80vw !important;
+    }
+    .pp-side img {
+      width: 80vw !important;
+      margin-top: 20em;
+    }
+    .state-side {
+      width: 80vw !important;
+        bottom: 0vw !important;
+        margin-top: 0 !important;
+        top: 163vw !important;
+    }
+
+    .state-side h4 {
+      margin-bottom: 0 !important;
+      font-size: 3.5vw !important;
+    }
+  }
+
+</style>
+
+<div
+  class="intro"
+  style="
+    position: relative;
+    width: 80vw;
+    margin: 20vh auto 5vh auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+  "
+>
+  <div
+    class="pp-side"
+    style="
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 47%;
+      display: flexbox;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img
+      style="margin: 18% auto 0 auto; width: 70%; display: flexbox"
+      src="images/profile-photo/pp-tyler.JPG"
+      alt=""
+    />
+  </div>
+  <div
+    class="state-side"
+    style="position: absolute; right: 0; width: 47%"
+  >
+    <h4 style="margin: 6.5vw auto 0 auto; font-family: Apercu-Light">
+      The work of Tyler Downing, aka Spiffie Hippie, is that of which strives to reach
+      the common culture that we are all a part of. This character named Head Boy is
+      supposed to encase the idea of the “smoke break” and stepping away from certain
+      obligations to be able to get time to yourself for your own sanity. I grew up doodling
+      which then fed into more thoughtful drawing, which was then the spawn of this current
+      art experience. I savor when work has an even balance of detail and form, allowing the
+      eye to wander around the image. Every piece of work that I create is more or less trying
+      to pull the viewer into the physical space or headspace of the piece, taking them out of
+      the surrounding area that they might be comfortable in. Most of my illustrations are of
+      creatures that have various combined features of creatures on Earth. When an artwork
+      makes you think ‘What was this guy thinking?’ is an accomplishment in my book.
+    </h4>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .port-slot {
+      height: 100vw !important;
+      top: 40vw !important;
+    }
+
+    .port-img {
+      width: 100% !important;
+    }
+
+    .desc-cont .left {
+      position: absolute;
+      right: 0 !important;
+      bottom: 0 !important;
+    }
+
+    /* .desc-cont .r {
+      left: 0 !important;
+    } */
+
+    .descript {
+      font-size: 3vw;
+    }
+  }
+  .descript {
+    font-family: "Apercu-Light";
+  }
+  .descript span {
+    font-family: "GT-Haptic-Light-Rotalic";
+  }
+
+</style>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+    top: 0vw;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/tyler/tyler 1.JPG" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Head Boy Posted</span>
+      <br />Tyler Downing
+      <br /><em>Digital drawing</em>
+      <br /><em>8" x 10.5"</em>
+    </span>
+  </div>
+</div>
+
+<div
+    class="port-slot"
+    style="
+      top: 20vw;
+      position: relative;
+      width: 80vw;
+      height: 20vw !important;
+      margin: 5vh auto 5vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/tyler/tyler 2.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 20%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Heady Boy Masthead</span>
+        <br />Tyler Downing 
+        <br /><em>Digtal drawing</em>
+        <br /><em>2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    height: 38.5vw;
+    top: 25vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/tyler/tyler 3.gif" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Head Boy Posted</span>
+      <br />Tyler Downing
+      <br /><em>Digital drawing</em>
+      <br /><em>8" x 10.5"</em>
+    </span>
+  </div>
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      top: 25vw;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/tyler/tyler 4.gif"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Heady Boy Masthead</span>
+        <br />Tyler Downing 
+        <br /><em>Digtal drawing</em>
+        <br /><em>2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    top: 25vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/tyler/tyler.5.png" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Head Boy in the Jungle</span>
+      <br />Tyler Downing
+      <br /><em>Digital drawing</em>
+      <br /><em>8" x 10.5"</em>
+    </span>
+  </div>
+</div>
+
+<div class="scene"></div>
+
+</body>
+<script src="js/tyler.js"></script>
+</html>

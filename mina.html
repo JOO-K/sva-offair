@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+</head>
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    /* div{
+          background: rgba(255, 255, 255, 0) !important;
+          border: none !important;
+      } */
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+  </style>
+<body>
+  <div id="top-scroll" style="position: fixed; top: 0; background: rgb(255, 113, 113);"></div>
+
+  <div
+    style="
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 93px;
+      height: 40px;
+      margin: 27px;
+      text-align: left;
+      z-index: 400;
+    "
+  >
+    
+    <div
+      class="home"
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        
+      "
+    >
+      
+      <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+        <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+      </span>
+    </div>
+  
+  </div>
+  <style>
+
+    @media all and (max-width: 480px) {
+      .info{
+        width: 30vw !important;
+        margin: 0;
+      }
+      .home{
+        width: 30vw !important;
+        margin: 0;
+      }
+      .student-nav{
+        width: 40vw !important;
+      }
+      .home span{
+        font-size: 7vw  !important;
+      }
+      .info span{
+        font-size: 7vw !important;
+      }
+      .student-nav span{
+        font-size: 7vw !important;
+      }
+    }
+  </style>
+  <div
+    class="info"
+    style="
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 100px;
+      height: 40px;
+      margin: 27px;
+      text-align: right;
+      z-index: 400;
+    "
+  >
+    <div
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+      "
+    >
+      <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+        <a href="info.html" style="text-decoration: none; color: black;">
+          Info
+        </a>
+      </span>
+      
+    </div>
+  </div>
+
+  <div
+    class="student-nav"
+    style="
+      position: relative;
+      width: 450px;
+      height: 150px;
+      margin: 100px auto 20px auto;
+      text-align: center;
+    "
+  >
+    <div
+      style="width: 100%; height: 40px; display: inline-block"
+    >
+      <span
+        style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+        >
+        <a style="text-decoration: none; color: black; cursor: pointer;" href="naomi.html">⤺</a>
+        </span
+      >
+    </div>
+    <div
+      style="
+        width: 100%;
+        height: 55px;
+        display: inline-block;
+      "
+    >
+      <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto"
+        >Mina Al Huqail</span
+      >
+      <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>Toward // To ward</span>
+    </div>
+    <div
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        font-size: 50px;
+      "
+    >
+      <span>
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="julia.html">⤻</a>
+      </span>
+    </div>
+  </div>
+  <style>
+    @media all and (max-width: 1000px) {
+      .intro {
+        top: 18vw;
+        margin-top: 30vw;
+        height: 250vw !important;
+      }
+      .pp-side {
+        width: 80vw !important;
+      }
+      .pp-side img {
+        width: 80vw !important;
+        margin-top: 20em;
+        margin-bottom: 0em;
+      }
+      .state-side {
+        width: 80vw !important;
+        bottom: 0vw !important;
+        margin-top: 0 !important;
+        top: 163vw !important;
+      }
+
+      .state-side h4 {
+        margin-bottom: 0 !important;
+        margin-top: 0 !important;
+        font-size: 3.5vw !important;
+      }
+    }
+
+  </style>
+  <div
+    class="intro"
+    style="
+      position: relative;
+      width: 80vw;
+      height: 50vw;
+      margin: 5vh auto 5vh auto;
+      flex-direction: column;
+      font-size: 15px;
+    "
+  >
+    <div
+      class="pp-side"
+      style="
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 47%;
+      "
+    >
+      <img
+        style="margin: 18% auto 18% auto; width: 70%;"
+        src="images/profile-photo/pp-mina.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="state-side"
+      style="position: absolute; right: 0; width: 47%;"
+    >
+      <h4 style="margin: 6vw auto 0 auto; font-family: Apercu-Light;">
+        Mina Al Huqail is a Saudi-Greek multimedia artist who’s work encompasses metalwork,
+        embroidery and painting. Toward//To Ward, is a series of beduin inspired face masks
+        reimagined to include the changing landscapes of Saudi Arabia’s “progression” and who is
+        invited in/left out of these spaces. The patterns are devised from specific imagery of google
+        map views; these locations include petrochemical facilities, expat compounds, parks and
+        highways. Through a flattened God-like view, the maps offer us geometric forms reminiscent of
+        motifs in traditional Saudi craft. This work prompts conversations of mobility and access in the
+        exclusionary spatial practices of modernization.
+      </h4>
+    </div>
+  </div>
+  <style>
+    @media all and (max-width: 1000px) {
+      .port-slot {
+        top: 0vw;
+        height: 100vw !important;
+      }
+
+      .port-img {
+        width: 100% !important;
+        position: absolute;
+        top: 0;
+      }
+
+      .desc-cont .left {
+        position: absolute;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      .desc-cont .r {
+        left: 0 !important;
+      }
+
+      .descript {
+        font-size: 3vw;
+      }
+    }
+    .descript {
+      font-family: "Apercu-Light";
+    }
+    .descript span {
+      font-family: "GT-Haptic-Light-Rotalic";
+    }
+
+  </style>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    height: 45vw;
+    margin: 15vh auto 15vh auto;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/mina/SalamPark.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Salam Park</span>
+      <br />Mina Al Huqail
+      <br /><em>Aluminum, steel wire, thread and
+      <br> goauche on found fabric
+      </em>
+      <br /><em>15" x 8.5"</em>, 2020
+    </span>
+  </div>
+</div>
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      height: 38.5vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/mina/Intersection.jpg"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Intersection</span>
+        <br />Mina Al Huqail
+        <br /><em>Aluminum, steel wire, thread and
+        <br> chalk on found fabric
+        </em>
+        <br /><em>15" x 9"</em>, 2020
+      </span>
+    </div>
+</div>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+      width: 70vw;
+      height: 38.5vw;
+      margin: 5vh auto 10vh auto;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+        right: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/mina/Complex.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Complex</span>
+        <br />Mina Al Huqail
+        <br /><em>Aluminum, steel wire, thread and
+        <br> chalk on found fabric
+        </em>
+        <br /><em>16" x 10"</em>, 2020
+    </span>
+  </div>
+</div>
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      height: 38.5vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/mina/PetrochemicalCompound.jpg"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Petrochemical Compound</span>
+        <br />Mina Al Huqail
+        <br /><em>Aluminum, steel wire, thread and
+        <br> goauche on found fabric
+        </em>
+        <br /><em>14.5" x 8.5"</em>, 2020
+    </span>
+      </span>
+    </div>
+</div>
+<div
+  class="port-slot"
+  style="
+    position: relative;
+      width: 80vw;
+      height: 38.5vw;
+      margin: 5vh auto 10vh auto;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/mina/BurqaBarricade.jpg" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Petrochemical Compound</span>
+        <br />Mina Al Huqail
+        <br /><em>Aluminum, digital photo
+        </em>
+        <br /> 2020
+    </span>
+    </span>
+  </div>
+</div>
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      height: 38.5vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/mina/Gatedcommunity.jpg"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Checkpoint</span>
+        <br />Mina Al Huqail
+        <br /><em>Aluminum, steel wire, enamel
+        </em>
+        <br /><em>25" x 11"</em>, 2020
+    </span>
+      </span>
+    </div>
+</div>
+
+<div class="scene"></div>
+
+</body>
+<script src="js/mina.js"></script>
+</html>

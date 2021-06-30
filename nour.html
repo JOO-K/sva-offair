@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+</head>
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    /* div{
+          background: rgba(255, 255, 255, 0) !important;
+          border: none !important;
+      } */
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+  </style>
+<body>
+<div id="top-scroll" style="position: fixed; top: 0; background: rgb(3, 141, 134);"></div>
+
+<div
+  style="
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 93px;
+    height: 40px;
+    margin: 27px;
+    text-align: left;
+    z-index: 400;
+  "
+>
+  
+  <div
+    class="home"
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      
+    "
+  >
+    
+    <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+      <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+    </span>
+  </div>
+
+</div>
+
+<style>
+
+  @media all and (max-width: 480px) {
+    .info{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .home{
+      width: 30vw !important;
+      margin: 0;
+    }
+    .student-nav{
+      width: 40vw !important;
+    }
+    .home span{
+      font-size: 7vw  !important;
+    }
+    .info span{
+      font-size: 7vw !important;
+    }
+    .student-nav span{
+      font-size: 7vw !important;
+    }
+  }
+</style>
+
+<div
+  class="info"
+  style="
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100px;
+    height: 40px;
+    margin: 27px;
+    text-align: right;
+    z-index: 400;
+  "
+>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+    "
+  >
+  <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+    <a href="info.html" style="text-decoration: none; color: black;">
+      Info
+    </a>
+  </span>
+  </div>
+</div>
+
+<div
+  class="student-nav"
+  style="
+    position: relative;
+    width: 450px;
+    height: 150px;
+    margin: 100px auto 20px auto;
+    text-align: center;
+  "
+>
+  <div
+    style="width: 100%; height: 40px; display: inline-block"
+  >
+    <span
+      style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+      >
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="tyler.html">⤺</a>
+      </span
+    >
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 55px;
+      display: inline-block;
+    "
+  >
+    <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto"
+      >Nour Moustafa</span
+    >
+    <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>EYE SEE</span>
+  </div>
+  <div
+    style="
+      width: 100%;
+      height: 40px;
+      display: inline-block;
+      font-size: 50px;
+    "
+  >
+    <span>
+    <a style="text-decoration: none; color: black; cursor: pointer;" href="juliet.html">⤻</a>
+    </span>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .intro {
+      top: 12vw;
+      margin-top: 30vw;
+      height: 250vw !important;
+    }
+    .pp-side {
+      /* min-height: 130vw !important; */
+      width: 80vw !important;
+    }
+    .pp-side img {
+      width: 80vw !important;
+      margin-top: 20em;
+    }
+    .state-side {
+      /* min-height: 70vw !important; */
+      width: 80vw !important;
+      top: 121vw !important;
+      margin: 50px 0 200px 0;
+    }
+
+    .state-side h4 {
+      margin-bottom: 0 !important;
+      font-size: 3.5vw !important;
+    }
+  }
+
+</style>
+
+<div
+  class="intro"
+  style="
+    position: relative;
+    width: 80vw;
+    margin: 5vh auto 5vh auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+
+  "
+>
+  <div
+    class="pp-side"
+    style="
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 47%;
+      display: flexbox;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img
+      style="margin: 18% auto 0 auto; width: 70%; display: flexbox"
+      src="images/profile-photo/pp-nour.jpg"
+      alt=""
+    />
+  </div>
+  <div
+    class="state-side"
+    style="position: absolute; right: 0; width: 47%"
+  >
+    <h4 style="margin: 6vw auto 0 auto; font-family: Apercu-Light">
+      Nour (they/he) is an Egyptian-Muslim digital illustrator and animator. His work under the title ‘EYE SEE’ samples different subjects which dabbles into thema such as stylized devils from Biblical lore, cyberpunk magicians, and a story of his in-the-works which deals with the Void. 
+    </h4>
+  </div>
+</div>
+
+<style>
+  @media all and (max-width: 1000px) {
+    .port-slot {
+      height: 80vw !important;
+      top: 40vw;
+    }
+
+    .port-img {
+      width: 100% !important;
+    }
+
+    .desc-cont .left {
+      position: absolute;
+      right: 0 !important;
+      bottom: 0 !important;
+    }
+
+    /* .desc-cont .r {
+      left: 0 !important;
+    } */
+
+    .descript {
+      font-size: 3vw;
+    }
+
+    #panorama {
+      margin-bottom: -30vh !important;
+    }
+  }
+  .descript {
+    font-family: "Apercu-Light";
+  }
+  .descript span {
+    font-family: "GT-Haptic-Light-Rotalic";
+  }
+
+  
+
+</style>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/nour/vcs_nourmoustafa_double sided_digital.png" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 23%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Double Sided</span>
+      <br />Nour Moustafa
+      <br /><em>Digital Painting</em>
+      <br />2020</em>
+    </span>
+  </div>
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/nour/vcs_nourmoustafa_emergence of vengeance_digital.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 36%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+      <span>Emergence of Vengeance</span>
+      <br />Nour Moustafa
+      <br /><em>Digital Painting</em>
+      <br />2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/nour/vcs_nourmoustafa_red queen_digital.png" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 30%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>The Red Queen</span>
+      <br />Nour Moustafa
+      <br /><em>Digital Painting</em>
+      <br />2020</em>
+    </span>
+    </span>
+  </div>
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 20vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/nour/vcs_nourmoustafa_self portrait_digital.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 34%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Self Portrait</span>
+        <br />Nour Moustafa
+        <br /><em>Digital Painting</em>
+        <br />2020</em>
+    </span>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+    <img style="width: 90%" src="images/gallery/nour/vcs_nourmoustafa_the stare_digital.gif" alt="" />
+  </div>
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 10%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>The Stare</span>
+      <br />Nour Moustafa
+      <br /><em>Digital Painting</em>
+      <br />2020</em>
+    </span>
+    </span>
+  </div>
+</div>
+
+<div class="scene"></div>
+
+</body>
+<script src="js/nour.js"></script>
+</html>

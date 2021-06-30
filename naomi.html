@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/three.min.js"></script>
+    <script src="js/GLTFLoader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.min.js"></script>
+</head>
+
+<style>
+    @font-face {
+      font-family: Beatrice;
+      src: url("fonts/Beatrice-Semibold.otf") format("opentype");
+    }
+    @font-face {
+      font-family: Apercu-Light;
+      src: url("fonts/Apercu-Light.otf") format("opentype");
+    }
+    @font-face {
+      font-family: GT-Haptic-Light-Rotalic;
+      src: url("fonts/GT-Haptik-Light-Rotalic-Trial.otf") format("opentype");
+    }
+    /* div{
+          background: rgba(255, 255, 255, 0) !important;
+          border: none !important;
+      } */
+    body {
+      overflow-x: hidden;
+    }
+
+    #top-scroll{
+    position: fixed;
+    left: 0;
+    width:90vw;
+    height:.7vh;
+    z-index:1000;
+    }
+
+    .scene{
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: -500;
+    }
+
+    .scene,
+    canvas {
+        
+        width: 100%;
+        height: 100%;
+        
+        top: 0;
+    }
+</style>
+
+<body>
+
+<div id="top-scroll" style="position: fixed; top: 0; background: rgb(252, 200, 246);">
+</div>
+
+<div
+    style="
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 93px;
+      height: 40px;
+      margin: 27px;
+      text-align: left;
+      z-index: 400;
+    "
+  >
+    
+    <div
+      class="home"
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        
+      "
+    >
+      
+      <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto">
+        <a style="text-decoration: none; color: black;" href="index.html">Home</a> 
+      </span>
+    </div>
+  
+</div>
+
+<style>
+  @media all and (max-width: 480px) {
+      .info{
+        width: 30vw !important;
+        margin: 0;
+      }
+      .home{
+        width: 30vw !important;
+        margin: 0;
+      }
+      .student-nav{
+        width: 40vw !important;
+      }
+      .home span{
+        font-size: 7vw  !important;
+      }
+      .info span{
+        font-size: 7vw !important;
+      }
+      .student-nav span{
+        font-size: 7vw !important;
+      }
+  }
+</style>
+
+<div
+    class="info"
+    style="
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 40px;
+      margin: 27px;
+      text-align: right;
+      z-index: 400;
+    "
+  >
+    <div
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+      "
+    >
+    <span style="font-size: 30px; font-family: 'Beatrice'; margin: auto" >
+      <a href="info.html" style="text-decoration: none; color: black;">
+        Info
+      </a>
+    </span>
+    </div>
+</div>
+
+<div
+    class="student-nav"
+    style="
+      position: relative;
+      width: 500px;
+      height: 250px;
+      margin: 100px auto 20px auto;
+      text-align: center;
+    "
+  >
+    <div
+      style="width: 100%; height: 40px; display: inline-block"
+    >
+      <span
+        style="display: inline-block; margin: 0 auto 0 auto; font-size: 50px"
+        >
+        <a style="text-decoration: none; color: black; cursor: pointer;" href="jay.html">⤺</a>
+        </span
+      >
+    </div>
+    <div
+      style="
+        width: 100%;
+        height: 55px;
+        display: inline-block;
+      "
+    >
+      <span style="font-size: 50px; font-family: 'Beatrice'; margin: auto">
+        Naomi Treistman
+        <span style="font-size: 30px !important; font-family: 'GT-Haptic-Light-Rotalic'; margin: auto"><br>Domestic Taxonomy</span>
+    </span
+      >
+    </div>
+    <div
+      style="
+        width: 100%;
+        height: 40px;
+        display: inline-block;
+        font-size: 50px;
+      "
+    >
+      <span>
+      <a style="text-decoration: none; color: black; cursor: pointer;" href="mina.html">⤻</a>
+      </span>
+    </div>
+</div>
+
+<style>
+    @media all and (max-width: 1000px) {
+      .intro {
+        /* height: calc(1 * 180vw) !important; */
+      }
+      .pp-side {
+        /* min-height: 130vw !important; */
+        width: 80vw !important;
+      }
+      .pp-side img {
+        width: 80vw !important;
+        margin-top: 20em;
+      }
+      .state-side {
+        /* min-height: 70vw !important; */
+        width: 80vw !important;
+        top: 200vw !important;
+        margin: 50px 0 200px 0;
+      }
+
+      .state-side h4 {
+        margin-bottom: 0 !important;
+        font-size: 3.5vw !important;
+      }
+    }
+
+</style>
+
+<div
+    class="intro"
+    style="
+      position: relative;
+      width: 80vw;
+      margin: 5vh auto 5vh auto;
+      display: flex;
+      flex-direction: column;
+      font-size: 15px;
+    "
+  >
+    <div
+      class="pp-side"
+      style="
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 47%;
+        display: flexbox;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="margin: 18% auto 0 auto; width: 70%; display: flexbox"
+        src="images/profile-photo/pp-naomi.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="state-side"
+      style="position: absolute; right: 0; width: 47%;"
+    >
+      <h4 style="margin: 6.5vw auto 0 auto; font-family: Apercu-Light; font-size: 18px; line-height: 27px;">
+        Naomi Treistman’s “Domestic Taxonomy” encompasses a series of sculptures that reflect upon the artificiality of modern culture. Every backyard has the same color, whether it is grass or faux turf, a suburban life demands an outdoor green carpet. Landscapers commodify greenery as a product through which humans can enjoy nature. Even more, city people do no less in decorating their apartments with indoor potted plants. As such it seems that the setting doesn’t really matter. Whether in the rural, urban or domestic sphere, we are all under the influence of a post-imperial rule that abstracts the nature of things through a value system that aims for possession rather than essential existence. 
+        <br><br>
+        Analyzing this idea from the perspective of the domestic environment, Treistman questions the reality of the new mundane by reducing it to vessels (potted plants) made from playful materials that abstract the limit between artificial and organic matter. The artist’s potted plants, vessels, or contained sculptures, intend to seize the tensions between needs and commodities, as well as story absorbing and story telling devices. Detaching their meaning from the notions of plant or object, they embrace a new artificial nature as means of emancipation. 
+      </h4>
+    </div>
+</div>
+
+<style>
+    @media all and (max-width: 1000px) {
+      .port-slot {
+        top: 150vw !important;
+        height: 100vw !important;
+      }
+
+      .port-img {
+        width: 100% !important;
+      }
+
+      .desc-cont .left {
+        position: absolute;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
+
+      /* .desc-cont .r {
+        left: 0 !important;
+      } */
+
+      .descript {
+        font-size: 3vw;
+      }
+    }
+    .descript {
+      font-family: "Apercu-Light";
+    }
+    .descript span {
+      font-family: "GT-Haptic-Light-Rotalic";
+    }
+
+</style>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 50vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+  <img style="width: 90%" src="images/gallery/naomi/NaomiAll1.jpg" alt="A colletive shot of Naomi's work, the opening image features her ceramic pieces displayed with slight room in between each element." />
+  </div>
+
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Domestic Taxonomy Collection</span>
+      <br />Naomi Treistman
+    </span>
+  </div>
+
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/naomi/Naomi2Gif.gif"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+      <span>Hang in there</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, wire, sillicon rubber, and clay
+      </em>
+      <br /><em>35" x 18" x 5" - 2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+  <img style="width: 90%" src="images/gallery/naomi/Naomi3Gif.gif" alt="A rotating view of Naomi's first piece, it features a pink assemblage at the base while a plant-like structure sits at the top." />
+  </div>
+
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 40%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Sisyphus</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, clay, acrylic paint, 
+      <br> flocking and varnish
+      </em>
+      <br /><em>11" x 5" x 6" - 2020</em>
+    </span>
+  </div>
+
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/naomi/Naomi4Gif.gif"
+        alt="The base consists of the lower half of a plastic cola bottle that has been sprayed in pale gray paint. The upper half features a dark navy column with cattails poking out."
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>American Milkweed</span>
+      <br />Naomi Treistman
+      <br /><em>Castilene, EPS foam glue, polyurethane, wire,
+      <br> packaging peanuts, aqua-resin and acrylic paint
+      </em>
+      <br /><em>8" x 4" x 4" - 2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+  <img style="width: 90%" src="images/gallery/naomi/Naomi5Gif.gif" alt="A broken vase sits about with a lone wilting flower." />
+  </div>
+
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 44%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>Grotto</span>
+      <br />Naomi Treistman
+      <br /><em>Wire, castilene, and silicon rubber
+      </em>
+      <br /><em>12" x 6" x 6" - 2020</em>
+    </span>
+  </div>
+
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/naomi/Naomi6Gif.gif"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 50%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Peripetia</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, wire, rope, 
+      <br> castilene and silicone rubber
+      </em>
+      <br /><em>15" x 5" x 5" - 2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+  <img style="width: 90%" src="images/gallery/naomi/Naomi7Gif.gif" alt="" />
+  </div>
+
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 40%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>The Yarda</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, aqua-resin, acrylic paint, 
+      <br> flocking and wire
+      </em>
+      <br /><em>15" x 5" x 5" - 2020</em>
+    </span>
+  </div>
+
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 10vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/naomi/Naomi8Gif.gif"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>Wire Transfer</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, polymer, wire,
+      <br>acrylic paint and flocking
+      </em>
+      <br /><em>9" x 10" x 5" - 2020</em>
+      </span>
+    </div>
+</div>
+
+<div
+  class="port-slot"
+  style="
+    position: relative;
+    width: 80vw;
+    min-height: 38.5vw;
+    margin: 15vh auto 15vh auto;
+    display: flex;
+  "
+>
+  <div
+    class="port-img"
+    style="
+      position: absolute;
+      right: 0;
+      width: 40%;
+      height: 100%;
+      display: inline-block;
+      text-align: center;
+      vertical-align: middle;
+    "
+  >
+  <img style="width: 90%" src="images/gallery/naomi/Naomi9Gif.gif" alt="" />
+  </div>
+
+  <div
+    class="desc-cont left"
+    style="
+      position: absolute;
+      top: 40%;
+      right: 45%;
+      padding: 1%;
+      text-align: center;
+      font-size: 1.5vw;
+      background: white;
+      border: 4px black solid;
+
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: 0.3s;
+      transform-style: preserve-3d;
+    "
+  >
+    <span class="descript">
+      <span>House</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane and paper tag
+      </em>
+      <br /><em>5" x 9" x 9" - 2020</em>
+    </span>
+  </div>
+
+</div>
+
+<div
+    class="port-slot"
+    style="
+      position: relative;
+      width: 80vw;
+      min-height: 30vw;
+      margin: 5vh auto 50vh auto;
+    "
+  >
+    <div
+      class="port-img"
+      style="
+        position: absolute;
+        left: 0;
+        width: 40%;
+        height: 100%;
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+      "
+    >
+      <img
+        style="width: 90%"
+        src="images/gallery/naomi/Naomi10Gif.gif"
+        alt=""
+      />
+    </div>
+    <div
+      class="desc-cont right"
+      style="
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        background: white;
+        border: 4px black solid;
+        padding: 1%;
+        text-align: center;
+        font-size: 1.5vw;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: 0.3s;
+        transform-style: preserve-3d;
+      "
+    >
+      <span class="descript l">
+        <span>TPP</span>
+      <br />Naomi Treistman
+      <br /><em>Polyurethane, wire, castilene, aqua-resin, 
+      <br> polymer, acrylic paint and varnish
+      </em>
+      <br /><em>25" x 14" x 9" - 2020</em>
+      </span>
+    </div>
+</div>
+
+<div class="scene"></div>
+
+</body>
+
+<script src="js/naomi.js"></script>
+</html>

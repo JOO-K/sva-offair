@@ -90,6 +90,14 @@ main{
 nav{
     position: fixed;
     width: 100%;
+    height: 14vh;
+    z-index: 100000;
+}
+
+.change-color {
+    background-color: rgba(0,0,0,.3);
+    
+    transition: .5s;
 }
 
 .home{
@@ -99,7 +107,7 @@ nav{
 
 .sva{
     position: fixed;
-    width: 8vw;
+    width: 7.5vw;
 }
 
 .sva img{
@@ -137,7 +145,7 @@ nav{
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-bottom: 100px;
+    
 }
 
 .showdes{
@@ -202,16 +210,16 @@ a{
 }
 
 #mina{
-    box-shadow: 0px 0px 20px 10px red;
+    box-shadow: 0px 0px 20px 10px #ff4d4d;
 }
 
 #mina:hover{
-    box-shadow: 0 0 0 10px red;
+    box-shadow: 0 0 0 10px #ff4d4d;
 }
 
 
 #mina h2:hover{
-    background-color: red;
+    background-color: #ff4d4d;
     color: white;
 }
 
@@ -282,15 +290,15 @@ a{
 }
 
 #naomi{
-    box-shadow: 0px 0px 20px 10px pink;
+    box-shadow: 0px 0px 20px 10px #ffb0ff;
 }
 
 #naomi:hover{
-    box-shadow: 0 0 0 10px pink;
+    box-shadow: 0 0 0 10px #ffb0ff;
 }
 
 #naomi h2:hover{
-    background-color: pink;
+    background-color: #ffb0ff;
     color: white;
 }
 

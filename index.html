@@ -5,40 +5,62 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600&display=swap" rel="stylesheet">  
+        <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600&display=swap" rel="stylesheet"> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
         <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
         <script type="text/javascript" src="js/sketch.js"></script>
-
-
+        <script type="text/javascript">
+            $(document).on('scroll', function(){
+                if ( $(window).scrollTop() > 10) {
+                    $('#nav').addClass('change-color');
+                } else {
+                    $('#nav').removeClass('change-color');
+                }
+            });
+        </script>
     </head>
 
 
     <body>
-       
+
         <div class="bgimage">
-        <img src="images/skybg.gif">
+            <img src="images/skybg.gif">
         </div>
-        <nav>
-            <div class="sva"><img src="images/SVA_solidflower_red_white_text.png"></div>
-            
-            <div class="vcs"><img src="images/vcs.jpeg"></div>
-            <div class="home"><h1>3Dream Spiral_Relax</h1></div>
+        <nav id="nav">
+            <a href="https://sva.edu/" target="_blank"><div class="sva"><img src="images/SVA_solidflower_red_white_text.png"></div></a>
+
+            <a href="https://sva.edu/academics/undergraduate/bfa-visual-and-critical-studies/blog?parentId=1335" target="_blank"><div class="vcs"><img src="images/vcs.png"></div></a>
+            <a href="index.html"><div class="home"><h1>3Dream Spiral_Relax</h1></div></a>
         </nav>
 
         <main></main>
-        
+
         <div class="spacer"></div>
         <div class="showdescontainer">
-            <div class="showdes">
+            <div class="showdes" style="text-indent: 25px">
                 <h3>BFA Visual and Critical Studies is pleased to present the VCS 2021 senior thesis show 3D/ream Spiral_r e l a x.
                     Curated by faculty member Suzanne Joelson, it includes Mina Al Huqail, Julia Colletes, Tyler Downing, Nour Moustafa, Juliet Nelson, Jay Park and Naomi Treistman. The exhibition will be on view from January 16 through February 6 at galleries.sva.edu.
                 </h3>
 
             </div>    
 
-            <div class="showdes">
+            <div class="showdes" style="text-indent: 25px">
                 <h3>
                     The Visual and Critical Studies Senior Thesis Group rolls with the unpredictable. In a challenging situation, they defied expectations. That is what school can be. One learns to develop a plan, then question assumptions and reconsider. Rarely is dialectical thinking so outwardly motivated. Time in quarantine has revealed untapped resources and for some, a fresh focus on long lived concerns.</h3>
+
+            </div>   
+        </div>
+
+        <div class="showdescontainer" style="padding-bottom: 100px;">
+            <div class="showdes" style="text-indent: 25px">
+                <h3>
+                    In a year in which community and family appear as heads on a screen, it is no surprise that three of the seven are working with faces. Tyler Downing has created an impermeable character, Head Boy, who embodies the smoke break and its offer of escape. Nour Moustafa generates characters for a mythology yet to be written. Mina Al Huqail who makes work about borders and boundaries, has in recent months secreted those images into the framing of a face. Her masks call on a tradition which they transgress. At the other end of the spectrum Julia Colletes employs traditional Sashiko stiching and laser </h3>
+
+            </div>   
+            <div class="showdes" >
+                <h3>printers to evoke a mountain range as a shelter for intimate inserts in her fourteen foot “Blue Book.”
+                    Juliet Nelson consistently works with climate change. In “Nelpo,” she explores the ugly side of the beauty business, creating paper from the flower industry’s shipping and material debris. While Nelson’s flowers come from a family farm in Ecuador, Naomi Treistman summons the plants of her native Peru, in sculptures that feel like wayward friends.
+                    Jay Park amazed us all by creating a thesis class website, the form of which feels as rich and tumultuous as the moment in which we live. We hope you will take a look.</h3>
 
             </div>   
         </div>
@@ -89,7 +111,7 @@
             <div class="emptystudent">
 
                 <div class="emptypic">
-                    <img src="images/spiral5.gif">
+                    <img src="images/spiral10.gif">
                 </div>
 
             </div>
@@ -197,28 +219,16 @@
             <div class="emptystudent">
 
                 <div class="emptypic">
-                    <img src="images/spiral8.gif">
+                    <img src="images/spiral11.gif">
                 </div>
 
             </div>
 
         </div>
-        
-        
-        <div class="showdescontainer">
-            <div class="showdes">
-                <h3>
-                    In a year in which community and family appear as heads on a screen, it is no surprise that three of the seven are working with faces. Tyler Downing has created an impermeable character, Head Boy, who embodies the smoke break and its offer of escape. Nour Moustafa generates characters for a mythology yet to be written. Mina Al Huqail who makes work about borders and boundaries, has in recent months secreted those images into the framing of a face. Her masks call on a tradition which they transgress. At the other end of the spectrum Julia Colletes employs traditional Sashiko stiching and laser </h3>
 
-            </div>   
-            <div class="showdes" >
-                <h3>printers to evoke a mountain range as a shelter for intimate inserts in her fourteen foot “Blue Book.”
-                    Juliet Nelson consistently works with climate change. In “Nelpo,” she explores the ugly side of the beauty business, creating paper from the flower industry’s shipping and material debris. While Nelson’s flowers come from a family farm in Ecuador, Naomi Treistman summons the plants of her native Peru, in sculptures that feel like wayward friends.
-                    Jay Park amazed us all by creating a thesis class website, the form of which feels as rich and tumultuous as the moment in which we live. We hope you will take a look.</h3>
 
-            </div>   
-        </div>
 
-    
+
+
 
     </body>
